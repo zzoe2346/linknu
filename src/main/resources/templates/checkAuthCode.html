@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>인증코드 확인</title>
+</head>
+<body>
+<form action="/checkAuthCode" method="post">
+    <input type="hidden" name="userEmail" th:value="${userEmail}">
+
+    <input type="text" name="inputCode">
+  <input type="submit" >
+</form>
+</body>
+</html>

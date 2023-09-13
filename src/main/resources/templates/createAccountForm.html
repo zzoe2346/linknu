@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+<div class="container">
+  <h2>회원가입</h2>
+  <span th:text="${userEmail}"></span>
+
+
+  <form action="/register" method="post">
+    <input type="hidden" name="userEmail" th:value="${userEmail}">
+    <div class="form-group">
+      <label for="name">이름:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">비밀번호:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+<!--    <div class="form-group">-->
+<!--      <label for="verificationCode">인증번호:</label>-->
+<!--      <input type="number" id="verificationCode" name="verificationCode" required>-->
+<!--      <button id="sendVerificationCode" type="button">인증번호 보내기</button>-->
+<!--    </div>-->
+    <button type="submit">가입하기</button>
+  </form>
+</div>
+<script>
+  // 인증번호 보내기 버튼 클릭 시 동작할 JavaScript 코드 추가
+  document.getElementById("sendVerificationCode").addEventListener("click", function() {
+    // 이 부분에서 이메일로 인증번호를 전송하는 로직을 구현해야 합니다.
+    // AJAX나 서버 요청을 사용하여 인증번호를 전송할 수 있습니다.
+    // 인증번호 전송 후 사용자에게 알림을 표시할 수도 있습니다.
+    alert("인증번호를 이메일로 전송했습니다.");
+  });
+</script>
+</body>
+</html>
