@@ -5,7 +5,6 @@ import com.example.linknu.dto.LoginInfo;
 import com.example.linknu.service.TaxiPartyService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +31,7 @@ public class TaxiPartyController {
         List<TaxiParty> taxiPartyBoards = taxiPartyService.getTaxiPartyBoards();
         model.addAttribute("taxiPartyBoards",taxiPartyBoards);
 
-        return "taxiPartyList";
+        return "taxi/taxiPartyList";
     }
 
     @GetMapping("taxiPartyRegistration")
@@ -45,7 +44,7 @@ public class TaxiPartyController {
 
 
 
-        return "taxiPartyRegistrationForm";
+        return "taxi/taxiPartyRegistrationForm";
     }
 
     @PostMapping("taxiPartyRegistration")
@@ -68,8 +67,23 @@ public class TaxiPartyController {
             return "redirect:/";
         }
 
-        taxiPartyService.createParty(title, content, destination, meetingPoint, departureDate, departureTime, numberOfParticipants, recruitmentDeadline);
+        TaxiParty party = taxiPartyService.createParty(title, content, destination, meetingPoint, departureDate, departureTime, numberOfParticipants, recruitmentDeadline);
+        taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(),party.getId());
 
         return "redirect:/";
+    }
+
+    @GetMapping("taxiPartyBoard")
+    public String taxiPartyBoard(
+            Model model,
+            @RequestParam("boardId") long boardId
+    ) {
+
+        TaxiParty taxiPartyBoard = taxiPartyService.getTaxiPartyBoard(boardId);
+
+        model.addAttribute("taxiPartyBoard",taxiPartyBoard);
+
+
+        return "taxi/taxiPartyBoard";
     }
 }

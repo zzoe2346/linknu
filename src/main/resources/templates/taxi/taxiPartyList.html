@@ -8,6 +8,7 @@
 <h1>taxiPartyList</h1>
 여기에 쭈욱 택시 파티 리스트 보여줘야되.
 <a href="taxiPartyRegistration">파티 등록</a>
+<!--<a th:href="@{/board(boardId=${board.boardId})}" th:text="${board.title}"></a>-->
 
 <div th:each="board: ${taxiPartyBoards}">
     <h2 th:text="${board.title}">타이틀</h2>
@@ -19,9 +20,9 @@
 
     </ul>
 
-    <a href="taxiPartyRegistration">참가?</a>
+    <a th:href="@{/taxiPartyBoard(boardId=${board.getId()})}">상세보기</a>
 
-    <a href="taxiPartyRegistration">상세 보기</a>
+    <a href="taxiPartyRegistration"> 참여 ?</a>
 </div>
 
 

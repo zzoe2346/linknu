@@ -24,13 +24,13 @@ public class TaxiParty {
     private String title;//
     private String content;//
     private String partyLeaderEmail;
-    private String destination;//
-    private String meetingPoint;//
+    private String destination;//중요
+    private String meetingPoint;//중요
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date departureDate;//
     @DateTimeFormat(pattern = "HH:mm")
-    private Time departureTime;//
-    private int numberOfParticipants;//
+    private Time departureTime;//중요
+    private int numberOfParticipants;//중요
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date recruitmentDeadline;//
 
