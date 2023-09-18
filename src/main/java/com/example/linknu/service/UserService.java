@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     @Autowired //ㅅㅂ 이걸 안했네
@@ -21,5 +23,13 @@ public class UserService {
         System.out.println(userEntity.getEmail());
         System.out.println("he?");
         userRepository.save(userEntity);
+    }
+
+    public User getUser(String email){
+        Optional<com.example.linknu.Entity.User> user0 = userRepository.findById(email);
+        com.example.linknu.Entity.User user1 = user0.get();
+        User user = new User(user1.getName(), user1.getEmail(), user1.getPassword());
+        return user;
+
     }
 }
