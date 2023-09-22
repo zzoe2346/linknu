@@ -1,9 +1,11 @@
 package com.example.linknu.service;
 
 import com.example.linknu.Entity.TaxiParty;
+import com.example.linknu.Entity.TaxiPartyUser;
 import com.example.linknu.dto.LoginInfo;
 import com.example.linknu.dto.User;
 import com.example.linknu.repository.TaxiPartyRepository;
+import com.example.linknu.repository.TaxiPartyUserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import java.util.Optional;
 public class TaxiPartyService {
     @Autowired
     TaxiPartyRepository taxiPartyRepository;
+    @Autowired
+    TaxiPartyUserRepository taxiPartyUserRepository;
     @Autowired
     HttpSession httpSession;
     public TaxiParty createParty(String title, String content, String destination, String meetingPoint, Date departureDate, String departureTime, int numberOfParticipants, Date recruitmentDeadline) {
@@ -49,7 +53,16 @@ public class TaxiPartyService {
         else return null;
     }
 
+    // 참여인원 체크. 만약에 인원수 다 찼으면 등록 불가
+    public boolean checkNumberOfParticipants(Long boardId,int numberOfParticipants){
+        Long countByBoardId = taxiPartyUserRepository.countByBoardId(boardId);
+        if(countByBoardId>=numberOfParticipants) return false;//더 하면 안댐
+        else return true;
+    }
     public void addUserToPartyUserTable(String email, Long boardId) {
+        //인원수 다 찼나? 여부
         //레포지토리 생성후 세이브한다.
+        taxiPartyUserRepository.save(new TaxiPartyUser(null, boardId, email,null));
+
     }
 }
