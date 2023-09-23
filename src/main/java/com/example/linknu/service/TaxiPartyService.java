@@ -3,6 +3,7 @@ package com.example.linknu.service;
 import com.example.linknu.Entity.TaxiParty;
 import com.example.linknu.Entity.TaxiPartyUser;
 import com.example.linknu.dto.LoginInfo;
+import com.example.linknu.dto.TaxiPartyDto;
 import com.example.linknu.dto.User;
 import com.example.linknu.repository.TaxiPartyRepository;
 import com.example.linknu.repository.TaxiPartyUserRepository;
@@ -34,7 +35,7 @@ public class TaxiPartyService {
         // LocalTime을 java.sql.Time으로 변환
         Time sqlTime = Time.valueOf(localTime);
 
-         TaxiParty saved = taxiPartyRepository.save(new TaxiParty(null, title, content, user.getEmail(), destination, meetingPoint, departureDate, sqlTime, numberOfParticipants, recruitmentDeadline));
+         TaxiParty saved = taxiPartyRepository.save(new TaxiParty(null, title, content, user.getEmail(), destination, meetingPoint, departureDate, sqlTime, numberOfParticipants,0, recruitmentDeadline));
          return saved;
 
 
@@ -43,6 +44,7 @@ public class TaxiPartyService {
 
     public List<TaxiParty> getTaxiPartyBoards() {
         return taxiPartyRepository.findAll();
+        //return taxiPartyRepository.findJoin();
     }
 
     public TaxiParty getTaxiPartyBoard(long boardId) {
@@ -59,10 +61,14 @@ public class TaxiPartyService {
         if(countByBoardId>=numberOfParticipants) return false;//더 하면 안댐
         else return true;
     }
-    public void addUserToPartyUserTable(String email, Long boardId) {
+    public void addUserToPartyUserTable(String email, Long boardId, String phoneNumber) {
         //인원수 다 찼나? 여부
         //레포지토리 생성후 세이브한다.
-        taxiPartyUserRepository.save(new TaxiPartyUser(null, boardId, email,null));
+        Optional<TaxiParty> byId = taxiPartyRepository.findById(boardId);
+        int currentNumberOfEnrolled = byId.get().getNumberOfEnrolled();
+        byId.get().setNumberOfEnrolled(currentNumberOfEnrolled+1);
+        taxiPartyRepository.save(byId.get());
+        taxiPartyUserRepository.save(new TaxiPartyUser(null, boardId, email,phoneNumber));
 
     }
 }

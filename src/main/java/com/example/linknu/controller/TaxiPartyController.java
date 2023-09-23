@@ -2,6 +2,7 @@ package com.example.linknu.controller;
 
 import com.example.linknu.Entity.TaxiParty;
 import com.example.linknu.dto.LoginInfo;
+import com.example.linknu.dto.TaxiPartyDto;
 import com.example.linknu.service.TaxiPartyService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.List;
 public class TaxiPartyController {
     @Autowired
     TaxiPartyService taxiPartyService;
+
     @GetMapping("taxiPartyList")
     public String taxiPartyList(
             HttpSession httpSession,
@@ -27,8 +29,14 @@ public class TaxiPartyController {
         if (loginInfo ==null){
             return "redirect:/";
         }
-
+//boardId를 가지고 오고 그 id를 taxi_party_user 카운트 세면됨. 그걸 전달
         List<TaxiParty> taxiPartyBoards = taxiPartyService.getTaxiPartyBoards();
+
+        for (TaxiParty taxiPartyBoard : taxiPartyBoards) {
+            System.out.println("taxiPartyBoard = " + taxiPartyBoard.getNumberOfParticipants());
+        }
+
+
         model.addAttribute("taxiPartyBoards",taxiPartyBoards);
 
         return "taxi/taxiPartyList";
@@ -68,7 +76,7 @@ public class TaxiPartyController {
         }
 
         TaxiParty party = taxiPartyService.createParty(title, content, destination, meetingPoint, departureDate, departureTime, numberOfParticipants, recruitmentDeadline);
-        taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(),party.getId());
+        taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(),party.getId(),null);
 
         return "redirect:/";
     }
@@ -99,7 +107,7 @@ public class TaxiPartyController {
     @PostMapping("taxiPartyEnroll")
     public String processTaxiPartyEnroll(
             @RequestParam("boardId") Long boardId,
-            @RequestParam("phoneNumber") int phoneNumber,
+            @RequestParam("phoneNumber") String phoneNumber,
             HttpSession httpSession
     ){
         //등록서비스
@@ -110,14 +118,14 @@ public class TaxiPartyController {
         TaxiParty taxiPartyBoard = taxiPartyService.getTaxiPartyBoard(boardId);
         int numberOfParticipants = taxiPartyBoard.getNumberOfParticipants();
 
-        if (taxiPartyService.checkNumberOfParticipants(boardId,numberOfParticipants)){댐
+        if (taxiPartyService.checkNumberOfParticipants(boardId,numberOfParticipants)){
             //성공.
             System.out.println("boardId = " + boardId + ", phoneNumber = " + phoneNumber);
-            taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(),boardId);
+            taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(),boardId,phoneNumber);
             return "redirect:/";
         }
         else {
-            return "이미 다 찬 파티라고 알린다.";
+            return "notice/fullParty";
         }
 
     }

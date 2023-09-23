@@ -17,12 +17,21 @@
         <li th:text="${board.departureTime}">An item</li>
         <li th:text="${board.departureDate}">An item</li>
         <li th:text="${board.recruitmentDeadline}">An item</li>
+        모집인원
+        <li th:text="${board.numberOfParticipants}">An item</li>
+        현재까지 모집
+        <li th:text="${board.numberOfEnrolled}">An item</li>
+
+
+
+
 
     </ul>
 
     <a th:href="@{/taxiPartyBoard(boardId=${board.getId()})}">상세보기</a>
 
-    <a th:href="@{/taxiPartyEnroll(boardId=${board.getId()})}"> 참여 ?</a>
+
+    <a   th:href="@{/taxiPartyEnroll(boardId=${board.getId()})}"> 참여 ?</a>
 </div>
 
 

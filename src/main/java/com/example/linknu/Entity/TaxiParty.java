@@ -30,7 +30,9 @@ public class TaxiParty {
     private Date departureDate;//
     @DateTimeFormat(pattern = "HH:mm")
     private Time departureTime;//중요
-    private int numberOfParticipants;//중요
+    private Integer numberOfParticipants;//중요 모집인원
+    private Integer numberOfEnrolled;
+    //현재 인원 현황 조인써야하나
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date recruitmentDeadline;//
 

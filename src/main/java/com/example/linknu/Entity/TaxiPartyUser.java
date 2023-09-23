@@ -18,6 +18,6 @@ public class TaxiPartyUser {
     private Long id;
     private Long boardId;
     private String email;
-    private Integer phoneNumber;
+    private String phoneNumber;
 
 }
