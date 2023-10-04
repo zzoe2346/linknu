@@ -66,7 +66,7 @@ public class TaxiPartyController {
 
             @RequestParam("departureTime")  String departureTime,
             @RequestParam("numberOfParticipants") int numberOfParticipants,
-            @RequestParam("recruitmentDeadline")  Date recruitmentDeadline
+            @RequestParam("partyPolicy") int partyPolicy //여기 까지 했다(확인)10.04
 
 
             ) {
@@ -74,8 +74,9 @@ public class TaxiPartyController {
         if (loginInfo ==null){
             return "redirect:/";
         }
+        System.out.println(partyPolicy);
 
-        TaxiParty party = taxiPartyService.createParty(title, content, destination, meetingPoint, departureDate, departureTime, numberOfParticipants, recruitmentDeadline);
+        TaxiParty party = taxiPartyService.createParty(title, content, destination, meetingPoint, departureDate, departureTime, numberOfParticipants,partyPolicy);
         taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(),party.getId(),null);
 
         return "redirect:/";

@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/css/main.css}"  />
+
     <meta charset="UTF-8">
     <title>taxiPartyList</title>
 </head>
 <body>
-<h1>taxiPartyList</h1>
-여기에 쭈욱 택시 파티 리스트 보여줘야되.
+<h1>택시 파티 리스트</h1>
 <a href="taxiPartyRegistration">파티 등록</a>
 <!--<a th:href="@{/board(boardId=${board.boardId})}" th:text="${board.title}"></a>-->
 
 <div th:each="board: ${taxiPartyBoards}">
     <h2 th:text="${board.title}">타이틀</h2>
     <ul class="list-group list-group-flush">
-        <li th:text="${board.destination}">목적</li>
-        <li th:text="${board.departureTime}">An item</li>
-        <li th:text="${board.departureDate}">An item</li>
-        <li th:text="${board.recruitmentDeadline}">An item</li>
-        모집인원
-        <li th:text="${board.numberOfParticipants}">An item</li>
-        현재까지 모집
-        <li th:text="${board.numberOfEnrolled}">An item</li>
+        <li th:text="${board.destination}">목적지</li>
+        <li th:text="${board.departureTime}">출발 시간</li>
+        <li th:text="${board.departureDate}">출발 일</li>
+        <li th:text="${board.numberOfParticipants}">총 모집인원</li>
+        <li th:text="${board.numberOfEnrolled}">현재까지 모은 인원</li>
 
 
 
@@ -31,7 +29,7 @@
     <a th:href="@{/taxiPartyBoard(boardId=${board.getId()})}">상세보기</a>
 
 
-    <a   th:href="@{/taxiPartyEnroll(boardId=${board.getId()})}"> 참여 ?</a>
+    <a   th:href="@{/taxiPartyEnroll(boardId=${board.getId()})}"> 참여하기</a>
 </div>
 
 

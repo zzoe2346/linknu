@@ -1,29 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" th:href="@{/css/main.css}"  />
+
     <meta charset="UTF-8">
     <title>taxiPartyRegistrationForm</title>
 </head>
 <body>
-토글로 표현하면 될듯한데? 택시 파티 등록 폼
-<form action="taxiPartyRegistration" method="post">
+<h2>택시파티 등록을 위한 양식입니다. 빠짐없이 작성해 주세요.</h2>
+<blockquote style="margin: 0;">
+    <p style="padding: 15px; background: #eee; border-radius: 5px;">
+        <span style="content: '\201C';">파티 인원이 다 모이면 자동으로 파티모집이 중단되고 메일이 발송됩니다(설명해야겠음)</span>
+        <span style="content: '\201D';"></span>
+    </p>
+</blockquote>
+<div>
+    <form action="taxiPartyRegistration" method="post">
 
-    제목:<input type="text" name="title">
+        <label for="title">파티 제목</label><br><input type="text" name="title" id="title" required><br>
 
-    내용:<input type="text" name="content">
+        <label for="content">내용</label><br> <input type="text" name="content"id="content" style="width:200px;height:100px;"><br>
 
-    목적지:<input type="text" name="destination">
-    집결지:<input type="text" name="meetingPoint">
-    출발날:<input type="date" placeholder="yyyy-MM-dd" name="departureDate">
+        <label for="content">목적지</label><br> <input type="text" name="destination" required><br>
 
-    출발시간:<input type="time" placeholder="HH:mm" name="departureTime">
-    인원:<input type="number" name="numberOfParticipants">
-    모집기한<input type="date" placeholder="yyyy-MM-dd" name="recruitmentDeadline">
-    <input type="submit" value="제출">
+        <label for="content">모이는 장소</label><br> <input type="text" name="meetingPoint" required><br>
 
+        <label for="content">출발일</label><br> <input type="date" placeholder="yyyy-MM-dd" name="departureDate" required><br>
 
+        <label for="content">출발시간</label><br> <input type="time" placeholder="HH:mm" name="departureTime" required><br>
 
+        <label for="content">모집인원</label><br> <input type="number" name="numberOfParticipants" min="1"  required><br>
+        <blockquote style="margin: 0;">
+            <p style="padding: 15px; background: #eee; border-radius: 5px;">
+                <span style="content: '\201C';">출발시간 30분 전에 파티 모집이 자동으로 종료됩니다.</span>
+                <span style="content: '\201D';"></span>
+            </p>
+        </blockquote><!--        모집기한 <input type="date" placeholder="yyyy-MM-dd" name="recruitmentDeadline"><br>-->
+        <label for="partyPolicy">모집인원이 충족 되지 않으면 어떻게 하시겠나요?</label><br>
 
-</form>
+        <select name="partyPolicy" id="partyPolicy" required>
+            <option value="">--선택해 주세요--</option>
+            <option value="1" >모집된 인원 끼리 진행하겠습니다.</option>
+            <option value="0" >중단하겠습니다.</option>
+
+        </select><br>
+        <input type="submit" value="제출">
+    </form>
+</div>
+
 </body>
 </html>

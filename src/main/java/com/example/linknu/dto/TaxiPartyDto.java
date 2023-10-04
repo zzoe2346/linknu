@@ -23,6 +23,6 @@ public class TaxiPartyDto {
     private int numberOfParticipants=taxiParty.getNumberOfParticipants();//중요 모집인원
     //현재 인원 현황 조인써야하나
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date recruitmentDeadline=taxiParty.getRecruitmentDeadline();
+    //private Date recruitmentDeadline=taxiParty.getRecruitmentDeadline();
     private Long numberOfEnrolled;
 }
