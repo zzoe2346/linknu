@@ -7,32 +7,33 @@
     <title>로그인</title>
 </head>
 <body>
+<div class="container">
+    <form action="/login" method="post" class="form-example">
+        <div class="form-example" >
+            <span>EMAIL</span><br>
+            <!--    <label for="email">이메일: </label>-->
+            <input type="text" name="email" id="email" required />
+        </div>
+        <div class="form-example">
+            <!--    <label for="password">비밀번호: </label>-->
+            <span>PASSWORD</span><br>
+            <input type="password" name="password" id="password" required />
+        </div>
+        <div class="form-example">
+            <input type="submit" value="로그인" />
+            <a href="/emailAuthForm">회원가입</a>
 
-<!--로그인-->
-<form action="/login" method="post" class="form-example">
-  <div class="form-example" >
-    <span>EMAIL</span><br>
-<!--    <label for="email">이메일: </label>-->
-    <input type="text" name="email" id="email" required />
-  </div>
-  <div class="form-example">
-<!--    <label for="password">비밀번호: </label>-->
-    <span>PASSWORD</span><br>
-    <input type="password" name="password" id="password" required />
-  </div>
-  <div class="form-example">
-    <input type="submit" value="로그인" />
-  </div>
-</form>
+        </div>
+    </form>
+    <br>
 
-<div>
+
 <!--    <a th:href="@{/emailAuthForm}">회원가입</a>
 
 아! th 넘으면 동적으로 만들수 있구먼 ${} 이런거 써서
 
 -->
 <!--회원가입-->
-    <a href="/emailAuthForm">회원가입</a>
 
 
 </div>
