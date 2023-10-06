@@ -3,6 +3,7 @@ package com.example.linknu.controller;
 import com.example.linknu.Entity.TaxiParty;
 import com.example.linknu.dto.LoginInfo;
 import com.example.linknu.dto.TaxiPartyDto;
+import com.example.linknu.service.EmailService;
 import com.example.linknu.service.TaxiPartyService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import java.util.List;
 public class TaxiPartyController {
     @Autowired
     TaxiPartyService taxiPartyService;
+    @Autowired
+    EmailService emailService;
 
     @GetMapping("taxiPartyList")
     public String taxiPartyList(
@@ -123,6 +126,18 @@ public class TaxiPartyController {
             //성공.
             System.out.println("boardId = " + boardId + ", phoneNumber = " + phoneNumber);
             taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(),boardId,phoneNumber);
+            //여기에 인원체크하면? 예) isFullParty-> true or false
+
+            //full party일때
+            if(taxiPartyService.isFullParty(boardId)){
+                //메일 고고
+                emailService.sendSuccessMail(boardId);
+
+            }
+            //아닐때 걍 패스하면됨
+
+
+
             return "redirect:/";
         }
         else {

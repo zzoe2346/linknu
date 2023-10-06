@@ -8,6 +8,7 @@ import com.example.linknu.repository.TaxiPartyRepository;
 import com.example.linknu.repository.TaxiPartyUserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -42,7 +43,7 @@ public class TaxiPartyService {
     }
 
     public List<TaxiParty> getTaxiPartyBoards() {
-        return taxiPartyRepository.findAll();
+        return taxiPartyRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         //return taxiPartyRepository.findJoin();
     }
 
@@ -69,5 +70,14 @@ public class TaxiPartyService {
         taxiPartyRepository.save(byId.get());
         taxiPartyUserRepository.save(new TaxiPartyUser(null, boardId, email,phoneNumber));
 
+    }
+
+    public boolean isFullParty(Long boardId) {
+        Optional<TaxiParty> byId = taxiPartyRepository.findById(boardId);
+        TaxiParty taxiParty = byId.get();
+        Integer numberOfParticipants = taxiParty.getNumberOfParticipants();
+        Integer numberOfEnrolled = taxiParty.getNumberOfEnrolled();
+        if (numberOfEnrolled == numberOfParticipants) return true;
+        else return false;
     }
 }
