@@ -145,4 +145,54 @@ public class TaxiPartyController {
         }
 
     }
+
+    @GetMapping("deleteTaxiParty")
+    public String deleteTaxiPartyBoard(
+            @RequestParam("boardId") Long boardId,
+            HttpSession httpSession
+    ){
+
+        LoginInfo loginInfo = (LoginInfo) httpSession.getAttribute("loginInfo");
+        String userEmail = loginInfo.getUser().getEmail();
+        //boardId이용해서 party_leader_email과 같으면 삭제하면댐.
+        boolean isWriter = taxiPartyService.isWriter(boardId, userEmail);
+
+        if(isWriter){
+            taxiPartyService.delete(boardId);
+            return "notice/deleteSuccessful";
+        }
+        else {
+
+            return "notice/deleteFail";
+
+        }
+
+
+
+
+    }
+
+    @GetMapping("updateTaxiParty")
+    public String updateTaxiParty(
+            @RequestParam("boardId") Long boardId,
+            HttpSession httpSession,
+            Model model
+    ){
+        LoginInfo loginInfo = (LoginInfo) httpSession.getAttribute("loginInfo");
+        String userEmail = loginInfo.getUser().getEmail();
+        //boardId이용해서 party_leader_email과 같으면 삭제하면댐.
+        boolean isWriter = taxiPartyService.isWriter(boardId, userEmail);
+
+        if(isWriter){
+            TaxiParty taxiPartyBoard = taxiPartyService.getTaxiPartyBoard(boardId);
+            model.addAttribute("taxiPartyBoard", taxiPartyBoard);
+
+            return "taxi/updateForm";
+        }
+        else {
+
+            return "notice/deleteFail";
+
+        }
+    }
 }

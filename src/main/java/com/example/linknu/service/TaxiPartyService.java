@@ -44,7 +44,6 @@ public class TaxiPartyService {
 
     public List<TaxiParty> getTaxiPartyBoards() {
         return taxiPartyRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-        //return taxiPartyRepository.findJoin();
     }
 
     public TaxiParty getTaxiPartyBoard(long boardId) {
@@ -79,5 +78,25 @@ public class TaxiPartyService {
         Integer numberOfEnrolled = taxiParty.getNumberOfEnrolled();
         if (numberOfEnrolled == numberOfParticipants) return true;
         else return false;
+    }
+
+    public void delete(Long boardId) {
+
+        Optional<TaxiParty> byId = taxiPartyRepository.findById(boardId);
+        TaxiParty taxiParty = byId.get();
+        taxiPartyRepository.delete(taxiParty);
+
+
+    }
+
+    public boolean isWriter(Long boardId, String userEmail) {
+        Optional<TaxiParty> byId = taxiPartyRepository.findById(boardId);
+        TaxiParty taxiParty = byId.get();
+        if(userEmail.equals(taxiParty.getPartyLeaderEmail())){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
