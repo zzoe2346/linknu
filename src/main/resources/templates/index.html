@@ -7,24 +7,56 @@
     <title>로그인</title>
 </head>
 <body>
+<div class="nine" style="text-align: center; font-size: 50px; text-transform: uppercase; color: #222; letter-spacing: 1px; font-family: 'Playfair Display', serif; font-weight: 400;">
+    <h1 style="margin-top: 5px;">
+        LinKnu
+        <span style="font-size: 15px; color: #444; word-spacing: 1px; font-weight: normal; letter-spacing: 2px; text-transform: uppercase; font-family: 'Raleway', sans-serif; font-weight: 500; display: grid; grid-template-columns: 1fr max-content 1fr; grid-template-rows: 27px 0; grid-gap: 20px; align-items: center;">
+            <span style="content: ' '; display: block; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc; height: 5px; background-color: #f8f8f8;"></span>
+            편리한 모임 공유 플랫폼
+            <span style="content: ' '; display: block; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc; height: 5px; background-color: #f8f8f8;"></span>
+        </span>
+    </h1>
+</div>
 <div class="container">
-    <form action="/login" method="post" class="form-example">
-        <div class="form-example" >
-            <span>EMAIL</span><br>
-            <!--    <label for="email">이메일: </label>-->
-            <input type="text" name="email" id="email" required />
-        </div>
-        <div class="form-example">
-            <!--    <label for="password">비밀번호: </label>-->
-            <span>PASSWORD</span><br>
-            <input type="password" name="password" id="password" required />
-        </div>
-        <div class="form-example">
-            <input type="submit" value="로그인" />
-            <a href="/emailAuthForm">회원가입</a>
+<!--    <form action="/login" method="post" class="form-example">-->
+<!--        <div class="form-example" >-->
+<!--            <span>EMAIL</span><br>-->
+<!--            &lt;!&ndash;    <label for="email">이메일: </label>&ndash;&gt;-->
+<!--            <input type="text" name="email" id="email" required />-->
+<!--        </div>-->
+<!--        <div class="form-example">-->
+<!--            &lt;!&ndash;    <label for="password">비밀번호: </label>&ndash;&gt;-->
+<!--            <span>PASSWORD</span><br>-->
+<!--            <input type="password" name="password" id="password" required />-->
+<!--        </div>-->
+<!--        <div class="form-example">-->
+<!--            <input type="submit" value="로그인" />-->
+<!--            <a href="/emailAuthForm">회원가입</a>-->
 
-        </div>
-    </form>
+<!--        </div>-->
+<!--    </form>-->
+
+
+
+    <div>
+        <form action="/login" method="post" class="form-example" style="max-width: 300px; margin: 0 auto;">
+            <div class="form-example" style="margin-bottom: 15px;">
+                <label for="email" style="color: #003366; font-weight: bold;">EMAIL</label><br>
+                <input type="text" name="email" id="email" required style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #003366; border-radius: 5px;" />
+            </div>
+            <div class="form-example" style="margin-bottom: 15px;">
+                <label for="password" style="color: #003366; font-weight: bold;">PASSWORD</label><br>
+                <input type="password" name="password" id="password" required style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #003366; border-radius: 5px;" />
+            </div>
+            <div class="form-example">
+                <input type="submit" value="로그인" style="background-color: #003366; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; width: 100%;" />
+                <a href="/emailAuthForm" style="color: #003366; text-decoration: none; display: block; text-align: center; margin-top: 10px;">회원가입</a>
+            </div>
+        </form>
+    </div>
+
+
+
     <br>
 
 

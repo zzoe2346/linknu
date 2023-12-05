@@ -27,9 +27,9 @@ public class TaxiPartyController {
     public String taxiPartyList(
             HttpSession httpSession,
             Model model
-                                ){
+    ) {
         LoginInfo loginInfo = (LoginInfo) httpSession.getAttribute("loginInfo");
-        if (loginInfo ==null){
+        if (loginInfo == null) {
             return "redirect:/";
         }
 //boardId를 가지고 오고 그 id를 taxi_party_user 카운트 세면됨. 그걸 전달
@@ -40,7 +40,7 @@ public class TaxiPartyController {
         }
 
 
-        model.addAttribute("taxiPartyBoards",taxiPartyBoards);
+        model.addAttribute("taxiPartyBoards", taxiPartyBoards);
 
         return "taxi/taxiPartyList";
     }
@@ -48,11 +48,9 @@ public class TaxiPartyController {
     @GetMapping("taxiPartyRegistration")
     public String taxiPartyRegistration(HttpSession httpSession) {
         LoginInfo loginInfo = (LoginInfo) httpSession.getAttribute("loginInfo");
-        if (loginInfo ==null){
+        if (loginInfo == null) {
             return "redirect:/";
         }
-
-
 
 
         return "taxi/taxiPartyRegistrationForm";
@@ -65,22 +63,22 @@ public class TaxiPartyController {
             @RequestParam("content") String content,
             @RequestParam("destination") String destination,
             @RequestParam("meetingPoint") String meetingPoint,
-            @RequestParam("departureDate")  Date departureDate,
+            @RequestParam("departureDate") Date departureDate,
 
-            @RequestParam("departureTime")  String departureTime,
+            @RequestParam("departureTime") String departureTime,
             @RequestParam("numberOfParticipants") int numberOfParticipants,
             @RequestParam("partyPolicy") int partyPolicy //여기 까지 했다(확인)10.04
 
 
-            ) {
+    ) {
         LoginInfo loginInfo = (LoginInfo) httpSession.getAttribute("loginInfo");
-        if (loginInfo ==null){
+        if (loginInfo == null) {
             return "redirect:/";
         }
         System.out.println(partyPolicy);
 
-        TaxiParty party = taxiPartyService.createParty(title, content, destination, meetingPoint, departureDate, departureTime, numberOfParticipants,partyPolicy);
-        taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(),party.getId(),null);
+        TaxiParty party = taxiPartyService.createParty(title, content, destination, meetingPoint, departureDate, departureTime, numberOfParticipants, partyPolicy);
+        taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(), party.getId(), null);
 
         return "redirect:/";
     }
@@ -93,7 +91,7 @@ public class TaxiPartyController {
 
         TaxiParty taxiPartyBoard = taxiPartyService.getTaxiPartyBoard(boardId);
 
-        model.addAttribute("taxiPartyBoard",taxiPartyBoard);
+        model.addAttribute("taxiPartyBoard", taxiPartyBoard);
 
 
         return "taxi/taxiPartyBoard";
@@ -103,72 +101,54 @@ public class TaxiPartyController {
     public String showTaxiPartyEnroll(
             @RequestParam("boardId") Long boardId,
             Model model
-    ){
+    ) {
 
         model.addAttribute("boardId", boardId);
         return "taxi/taxiPartyEnrollForm";
     }
+
     @PostMapping("taxiPartyEnroll")
     public String processTaxiPartyEnroll(
             @RequestParam("boardId") Long boardId,
             @RequestParam("phoneNumber") String phoneNumber,
             HttpSession httpSession
-    ){
-        //등록서비스
-        //taxiPartyService.
-
+    ) {
         LoginInfo loginInfo = (LoginInfo) httpSession.getAttribute("loginInfo");
 
         TaxiParty taxiPartyBoard = taxiPartyService.getTaxiPartyBoard(boardId);
         int numberOfParticipants = taxiPartyBoard.getNumberOfParticipants();
 
-        if (taxiPartyService.checkNumberOfParticipants(boardId,numberOfParticipants)){
-            //성공.
-            System.out.println("boardId = " + boardId + ", phoneNumber = " + phoneNumber);
-            taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(),boardId,phoneNumber);
-            //여기에 인원체크하면? 예) isFullParty-> true or false
-
-            //full party일때
-            if(taxiPartyService.isFullParty(boardId)){
-                //메일 고고
+        if (taxiPartyService.checkNumberOfParticipants(boardId, numberOfParticipants)) {
+            taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(), boardId, phoneNumber);
+            //목표 인원에 도달 했을때 실행된다.
+            if (taxiPartyService.isFullParty(boardId)) {
                 emailService.sendSuccessMail(boardId);
-
             }
-            //아닐때 걍 패스하면됨
-
-
-
             return "redirect:/";
-        }
-        else {
+        } else {
             return "notice/fullParty";
         }
-
     }
 
     @GetMapping("deleteTaxiParty")
     public String deleteTaxiPartyBoard(
             @RequestParam("boardId") Long boardId,
             HttpSession httpSession
-    ){
+    ) {
 
         LoginInfo loginInfo = (LoginInfo) httpSession.getAttribute("loginInfo");
         String userEmail = loginInfo.getUser().getEmail();
         //boardId이용해서 party_leader_email과 같으면 삭제하면댐.
         boolean isWriter = taxiPartyService.isWriter(boardId, userEmail);
 
-        if(isWriter){
+        if (isWriter) {
             taxiPartyService.delete(boardId);
             return "notice/deleteSuccessful";
-        }
-        else {
+        } else {
 
             return "notice/deleteFail";
 
         }
-
-
-
 
     }
 
@@ -177,19 +157,18 @@ public class TaxiPartyController {
             @RequestParam("boardId") Long boardId,
             HttpSession httpSession,
             Model model
-    ){
+    ) {
         LoginInfo loginInfo = (LoginInfo) httpSession.getAttribute("loginInfo");
         String userEmail = loginInfo.getUser().getEmail();
         //boardId이용해서 party_leader_email과 같으면 삭제하면댐.
         boolean isWriter = taxiPartyService.isWriter(boardId, userEmail);
 
-        if(isWriter){
+        if (isWriter) {
             TaxiParty taxiPartyBoard = taxiPartyService.getTaxiPartyBoard(boardId);
             model.addAttribute("taxiPartyBoard", taxiPartyBoard);
 
             return "taxi/updateForm";
-        }
-        else {
+        } else {
 
             return "notice/deleteFail";
 

@@ -44,18 +44,15 @@ public class EmailService {
 
     public void sendSuccessMail(Long boardId){
         List<TaxiPartyUser> taxiPartyUsers = taxiPartyUserRepository.findByBoardId(boardId);
-
         StringBuilder numbers = new StringBuilder();
-        //번호 리스트
+
         for(int i=0;i<taxiPartyUsers.size();i++){
             if (taxiPartyUsers.get(i).getPhoneNumber()!=null){
                 numbers.append(taxiPartyUsers.get(i).getPhoneNumber());
                 numbers.append("\n");
             }
         }
-
         for(int i=0;i<taxiPartyUsers.size();i++){
-
             if(taxiPartyUsers.get(i).getPhoneNumber() == null){
                 SimpleMailMessage message = new SimpleMailMessage();
                 message.setSubject("택시파티에 성공하였습니다! 파티원들에게 연락하세요!");
@@ -71,11 +68,7 @@ public class EmailService {
                 message.setTo(taxiPartyUsers.get(i).getEmail());
 
                 javaMailSender.send(message);
-
             }
-
-
-
         }
     }
 
