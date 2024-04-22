@@ -2,7 +2,66 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <link rel="stylesheet" th:href="@{/css/main.css}"  />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa; /* Light grey background */
+      color: #333; /* Dark grey text color */
+      padding: 20px;
+    }
 
+    .container {
+      max-width: 400px; /* Limiting container width */
+      margin: 0 auto; /* Centering container horizontally */
+      background-color: #fff; /* White background */
+      padding: 20px;
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    }
+
+    h2 {
+      text-align: center; /* Center heading */
+      color: #007bff; /* Blue heading color */
+      margin-bottom: 20px; /* Spacing below heading */
+    }
+
+    form {
+      text-align: left; /* Left align form elements */
+    }
+
+    .form-group {
+      margin-bottom: 20px; /* Spacing below form groups */
+    }
+
+    label {
+      font-weight: bold; /* Bold label text */
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff; /* Blue submit button */
+      color: #fff; /* White text */
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    /* Your custom styles here */
+  </style>
   <meta charset="UTF-8">
     <title>회원가입</title>
 </head>
@@ -15,12 +74,12 @@
   <form action="/register" method="post">
     <input type="hidden" name="userEmail" th:value="${userEmail}">
     <div class="form-group">
-      <label for="name">이름:</label>
+      <label for="name">이름</label>
       <input type="text" id="name" name="name" required>
     </div>
 
     <div class="form-group">
-      <label for="password">비밀번호:</label>
+      <label for="password">비밀번호</label>
       <input type="password" id="password" name="password" required>
     </div>
 <!--    <div class="form-group">-->

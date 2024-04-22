@@ -2,12 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/main.css}"  />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            color: #333; /* Dark grey text color */
+            padding: 20px;
+        }
 
+        form {
+            background-color: #fff; /* White background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            padding: 20px;
+            max-width: 400px; /* Limiting form width */
+            margin: 0 auto; /* Centering form horizontally */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            margin-bottom: 20px; /* Spacing below form elements */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff; /* Blue submit button */
+            color: #fff; /* White text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
     <meta charset="UTF-8">
     <title>인증코드 확인</title>
 </head>
 <body>
 <form action="/checkAuthCode" method="post">
+    <h2>인증코드 확인</h2>
     <input type="hidden" name="userEmail" th:value="${userEmail}">
 
     <input type="text" name="inputCode">

@@ -2,27 +2,89 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/css/main.css}"  />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            color: #333; /* Dark grey text color */
+            padding: 20px;
+        }
 
+        h2 {
+            color: #007bff; /* Blue title */
+            margin-bottom: 20px; /* Spacing below title */
+            text-align: center;
+        }
+
+        blockquote {
+            margin: 0;
+            padding: 15px;
+            background: #eee;
+            border-radius: 5px;
+            margin-bottom: 20px; /* Spacing below blockquote */
+        }
+
+        form {
+            background-color: #fff; /* White background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            padding: 20px;
+            max-width: 500px; /* Limiting form width */
+            margin: 0 auto; /* Centering form horizontally */
+        }
+
+        label {
+            font-weight: bold; /* Bold label text */
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            margin-bottom: 10px; /* Spacing below form elements */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff; /* Blue submit button */
+            color: #fff; /* White text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
     <meta charset="UTF-8">
     <title>taxiPartyRegistrationForm</title>
 </head>
 <body>
-<h2>택시파티 등록을 위한 양식입니다. 빠짐없이 작성해 주세요.</h2>
-<blockquote style="margin: 0;">
-    <p style="padding: 15px; background: #eee; border-radius: 5px;">
-        <span style="content: '\201C';">파티 인원이 다 모이면 자동으로 파티모집이 중단되고 메일이 발송됩니다(설명해야겠음)</span>
-        <span style="content: '\201D';"></span>
-    </p>
-</blockquote>
+
+<!--<blockquote style="margin: 0;">-->
+<!--    <p style="padding: 15px; background: #eee; border-radius: 5px;">-->
+<!--        <span style="content: '\201C';">파티 인원이 다 모이면 자동으로 파티모집이 중단되고 메일이 발송됩니다</span>-->
+<!--        <span style="content: '\201D';"></span>-->
+<!--    </p>-->
+<!--</blockquote>-->
 <div>
+    <h2>택시파티 등록을 위한 양식입니다. 빠짐없이 작성해 주세요.</h2>
     <form action="taxiPartyRegistration" method="post">
 
         <label for="title">파티 제목</label><br><input type="text" name="title" id="title" required><br>
 
         <label for="content">내용</label><br>
 <!--        <input type="text" name="content" id="content" style="width: 200px; height: 100px; word-wrap: break-word;"><br>-->
-        <label for="content">본문</label><br>
-        <textarea name="content" id="content" style="width: 200px; height: 100px; overflow-wrap: break-word;"></textarea><br>
+        <textarea name="content" id="content" style=" height: 100px; overflow-wrap: break-word;"></textarea><br>
 
         <label for="content">목적지</label><br> <input type="text" name="destination" required><br>
 
@@ -33,12 +95,12 @@
         <label for="content">출발시간</label><br> <input type="time" placeholder="HH:mm" name="departureTime" required><br>
 
         <label for="content">모집인원</label><br> <input type="number" name="numberOfParticipants" min="1"  required><br>
-        <blockquote style="margin: 0;">
-            <p style="padding: 15px; background: #eee; border-radius: 5px;">
-                <span style="content: '\201C';">출발시간 30분 전에 파티 모집이 자동으로 종료됩니다.</span>
-                <span style="content: '\201D';"></span>
-            </p>
-        </blockquote><!--        모집기한 <input type="date" placeholder="yyyy-MM-dd" name="recruitmentDeadline"><br>-->
+<!--        <blockquote style="margin: 0;">-->
+<!--            <p style="padding: 15px; background: #eee; border-radius: 5px;">-->
+<!--                <span style="content: '\201C';">출발시간 30분 전에 파티 모집이 자동으로 종료됩니다.</span>-->
+<!--                <span style="content: '\201D';"></span>-->
+<!--            </p>-->
+<!--        </blockquote>&lt;!&ndash;        모집기한 <input type="date" placeholder="yyyy-MM-dd" name="recruitmentDeadline"><br>&ndash;&gt;-->
         <label for="partyPolicy">모집인원이 충족 되지 않으면 어떻게 하시겠나요?</label><br>
 
         <select name="partyPolicy" id="partyPolicy" required>

@@ -2,21 +2,87 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/main.css}"  />
+    <style>
+        h2{
+            align-content: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            color: #333; /* Dark grey text color */
+            padding: 20px;
+        }
 
+        form {
+            background-color: #fff; /* White background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            padding: 20px;
+            max-width: 400px; /* Limiting form width */
+            margin: 0 auto; /* Centering form horizontally */
+        }
+
+        label {
+            font-weight: bold; /* Bold label text */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            margin-bottom: 10px; /* Spacing below form elements */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff; /* Blue submit button */
+            color: #fff; /* White text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        p {
+            margin-top: 20px; /* Spacing above paragraph */
+        }
+    </style>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>신청</title>
 </head>
 <body>
-enroll-form !
-<form action="taxiPartyEnroll" method="post">
-    폰번호
-    <input type="text" name="phoneNumber">
+
+<form id="enrollForm" action="taxiPartyEnroll" method="post">
+    <h2>연락받을 전화번호</h2>
+    <label for="phoneNumber">전화번호:</label><br>
+    <input type="text" id="phoneNumber" name="phoneNumber"><br>
     <input type="submit" value="등록">
     <input type="hidden" th:value="${boardId}" name="boardId">
-
 </form>
-입력하신 번호로 파티장으로 부터 연락이 올것입니다.
-파티가 성사 혹은 무산될시 메일을 보내드립니다.
+
+<script>
+    // Get the form element
+    var form = document.getElementById("enrollForm");
+
+    // Add event listener for form submission
+    form.addEventListener("submit", function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Show a popup
+        alert("제출되었습니다!");
+
+        // Submit the form programmatically
+        form.submit();
+    });
+</script>
+
 
 </body>
 </html>

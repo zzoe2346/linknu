@@ -5,10 +5,44 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light grey background */
+    color: #333; /* Dark grey text color */
+    padding: 20px;
+    }
+
+    /* Align content center */
+    .center-content {
+    text-align: center;
+    }
+
+    p {
+    margin-bottom: 20px; /* Spacing below paragraph */
+    }
+
+    a {
+    display: inline-block; /* Display as block element */
+    background-color: #007bff; /* Blue link background */
+    color: #fff; /* White text */
+    padding: 10px 20px;
+    text-decoration: none; /* Remove default underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s;
+    }
+
+    a:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    }
+    </style>
     <title>오류</title>
 </head>
 <body>
-<p>@knu.ac.kr 인 이메일만 가입이 가능합니다.</p>
-<a href="/emailAuthForm">뒤로</a>
+<div class="center-content"> <!-- Apply center-content class to center the content -->
+    <p>@knu.ac.kr 인 이메일만 가입이 가능합니다.</p>
+    <a href="/emailAuthForm">뒤로</a>
+</div>
+
 </body>
 </html>
