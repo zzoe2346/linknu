@@ -1,10 +1,12 @@
 body {
-    margin-left: 200px;  /* 좌측 여백 설정 */
-    margin-right: 200px; /* 우측 여백 설정 */
+    margin: 0; /* 기본 마진 제거 */
+    padding: 20px; /* 내부 여백 추가 */
 }
+
 .container {
     display: flex;
-    justify-content: center; /* 가로 중앙 정렬 */
+    flex-direction: column; /* 수직 정렬을 위해 컬럼 방향으로 설정 */
     align-items: center; /* 세로 중앙 정렬 */
-    height: 100vh; /* 뷰포트 높이에 맞게 설정 */
+    min-height: 100vh; /* 최소 높이 설정 */
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
 }
