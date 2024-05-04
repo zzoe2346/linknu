@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column; /* 수직 정렬을 위해 컬럼 방향으로 설정 */
     align-items: center; /* 세로 중앙 정렬 */
-    min-height: 100vh; /* 최소 높이 설정 */
-    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+
+    /*min-height: 100vh; !* 최소 높이 설정 *!*/
+    /*box-sizing: border-box; !* 패딩을 포함한 크기 계산 *!*/
 }
