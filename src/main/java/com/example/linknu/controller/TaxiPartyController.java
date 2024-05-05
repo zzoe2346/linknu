@@ -80,7 +80,8 @@ public class TaxiPartyController {
         TaxiParty party = taxiPartyService.createParty(title, content, destination, meetingPoint, departureDate, departureTime, numberOfParticipants, partyPolicy);
         taxiPartyService.addUserToPartyUserTable(loginInfo.getUser().getEmail(), party.getId(), null);
 
-        return "redirect:/";
+//        return "redirect:/templates/main.html";
+        return "success";
     }
 
     @GetMapping("taxiPartyBoard")

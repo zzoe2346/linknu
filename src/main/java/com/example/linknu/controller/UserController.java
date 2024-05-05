@@ -24,6 +24,11 @@ public class UserController {
 
         return "emailAuthForm";
     }
+    @GetMapping("/ok")
+    public String alertOk() {
+
+        return "taxiPartyList";
+    }
 
     @PostMapping("/register")
     public String register(
